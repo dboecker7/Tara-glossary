@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TARA Glossary — LIFTER AI · Wealth Horizons</title>
+<style>
+  :root {
+    --navy: #0D1F3C;
+    --navyMid: #1E3A5F;
+    --navyLight: #162C4A;
+    --gold: #B8962E;
+    --goldLight: #F5EDD6;
+    --white: #ffffff;
+    --grey: #333333;
+    --mgrey: #666666;
+    --lgrey: #999999;
+    --rule: #CCCCCC;
+    --teal: #1E6B7A;
+    --green: #2E7D4F;
+    --red: #C05A3A;
+    --bg: #F8F7F4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--bg);
+    color: var(--grey);
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  /* ── Header ─────────────────────────────────────── */
+  header {
+    background: var(--navy);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+
+  .header-top {
+    background: var(--navyMid);
+    padding: 8px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .brand {
+    color: var(--gold);
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+  }
+
+  .header-title {
+    padding: 20px 32px 16px;
+  }
+
+  .header-title h1 {
+    color: var(--white);
+    font-family: 'Arial', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .header-title p {
+    color: #8AAAC8;
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    margin-top: 4px;
+  }
+
+  /* ── Search ──────────────────────────────────────── */
+  .search-wrap {
+    padding: 14px 32px;
+    background: var(--navyLight);
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  #search {
+    width: 100%;
+    max-width: 560px;
+    padding: 10px 16px;
+    border: 2px solid rgba(184,150,46,0.4);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.06);
+    color: var(--white);
+    font-family: 'Arial', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  #search::placeholder { color: #6A88A4; }
+  #search:focus { border-color: var(--gold); background: rgba(255,255,255,0.1); }
+
+  /* ── Alpha nav ───────────────────────────────────── */
+  .alpha-nav {
+    background: var(--white);
+    border-bottom: 2px solid var(--gold);
+    padding: 10px 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .alpha-nav a {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .alpha-nav a:hover { background: var(--navy); color: var(--gold); }
+  .alpha-nav a.has-entries { color: var(--gold); }
+  .alpha-nav a.no-entries { color: var(--lgrey); pointer-events: none; }
+
+  /* ── Layout ──────────────────────────────────────── */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+  }
+
+  /* ── Section headers ─────────────────────────────── */
+  .letter-section {
+    margin-top: 48px;
+  }
+
+  .letter-section:first-of-type { margin-top: 0; }
+
+  .letter-heading {
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    padding: 6px 0 10px;
+    border-bottom: 1px solid var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .letter-heading .big-letter {
+    font-size: 32px;
+    color: var(--navy);
+    letter-spacing: 0;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  /* ── Entries ─────────────────────────────────────── */
+  .entry {
+    padding: 20px 0;
+    border-bottom: 1px solid #E8E4DC;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 0 32px;
+    align-items: start;
+  }
+
+  .entry:last-child { border-bottom: none; }
+
+  .entry-term {
+    font-family: 'Arial', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    padding-top: 2px;
+    line-height: 1.4;
+  }
+
+  .entry-term .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-top: 5px;
+    line-height: 1.4;
+  }
+
+  .tag-acronym { background: #E8F4F8; color: var(--teal); }
+  .tag-framework { background: #F0F8EC; color: var(--green); }
+  .tag-concept { background: var(--goldLight); color: var(--gold); }
+  .tag-protocol { background: #F8F0EC; color: var(--red); }
+
+  .entry-def {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--grey);
+  }
+
+  .entry-def em {
+    font-style: normal;
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  .entry-def .see-also {
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--lgrey);
+    font-family: 'Arial', sans-serif;
+  }
+
+  /* ── Category filter ─────────────────────────────── */
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  .filter-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1.5px solid var(--rule);
+    background: var(--white);
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--mgrey);
+    transition: all 0.15s;
+  }
+  .filter-btn:hover { border-color: var(--navy); color: var(--navy); }
+  .filter-btn.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+  /* ── Stats bar ───────────────────────────────────── */
+  .stats-bar {
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    color: var(--lgrey);
+    margin-bottom: 24px;
+  }
+  #result-count { font-weight: 700; color: var(--navy); }
+
+  /* ── Footer ──────────────────────────────────────── */
+  footer {
+    background: var(--navy);
+    color: #6A88A4;
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    text-align: center;
+    padding: 20px 32px;
+    margin-top: 60px;
+  }
+
+  /* ── No results ──────────────────────────────────── */
+  #no-results {
+    display: none;
+    text-align: center;
+    padding: 60px 0;
+    font-family: 'Arial', sans-serif;
+    color: var(--lgrey);
+    font-size: 15px;
+  }
+
+  /* ── Responsive ──────────────────────────────────── */
+  @media (max-width: 640px) {
+    .entry { grid-template-columns: 1fr; gap: 8px 0; }
+    .container { padding: 24px 16px 60px; }
+    .header-title { padding: 16px; }
+    .header-title h1 { font-size: 22px; }
+    .search-wrap { padding: 12px 16px; }
+    .alpha-nav { padding: 8px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <span class="brand">LIFTER AI  ·  Wealth Horizons  ·  Internal Reference</span>
+    <span class="brand" style="color:#6A88A4">Confidential</span>
+  </div>
+  <div class="header-title">
+    <h1>TARA Glossary</h1>
+    <p>All terms, acronyms, frameworks, and theories used across the TARA ecosystem</p>
+  </div>
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="Search terms and definitions…" autocomplete="off" spellcheck="false">
+  </div>
+</header>
+
+<div class="alpha-nav" id="alpha-nav" aria-label="Jump to letter"></div>
+
+<div class="container">
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All entries</button>
+    <button class="filter-btn" data-filter="acronym">Acronyms</button>
+    <button class="filter-btn" data-filter="concept">Concepts</button>
+    <button class="filter-btn" data-filter="framework">Frameworks & Research</button>
+    <button class="filter-btn" data-filter="protocol">Protocols & Mechanisms</button>
+  </div>
+
+  <div class="stats-bar"><span id="result-count">—</span> entries shown</div>
+
+  <div id="glossary-body"></div>
+  <div id="no-results">No matching entries. Try a shorter search term.</div>
+</div>
+
+<footer>
+  TARA Glossary  ·  LIFTER AI  ·  Wealth Horizons Implementation  ·  Proprietary &amp; Confidential  ·  Version 1.0  ·  April 2026
+</footer>
+
+<script>
+const ENTRIES = [
+  // ── ACRONYMS ────────────────────────────────────────────────────────────
+  { term: "CAAS — Companion as a Service", tag: "acronym", def: "The commercial model through which domain partners (such as Wealth Horizons) embed their expertise into HELEN's architecture. WH's TARA implementation is a CAAS deployment. Other CAAS partners may build different applications on the same HELEN platform for domains such as healthcare, legal services, or education." },
+  { term: "CAAS Gateway", tag: "acronym", def: "The technical connector that allows WH to push documents, portfolio data, and family governance materials into the SponsorSphere at onboarding. The Gateway is the onboarding interface between the adviser's existing data infrastructure and TARA's knowledge architecture." },
+  { term: "CoreLens", tag: "acronym", def: "The psychographic assessment that seeds each family member's CoreView profile. Uses image-based, System 1 response capture (intuitive reactions rather than deliberate self-reporting) to determine a person's ViQ type across four psychological axes. Administered before the first TARA session." },
+  { term: "CoreView", tag: "acronym", def: "TARA's persistent psychological and capital profile per family member. Not a one-time assessment — it evolves with every interaction. Stores ViQ type, emotional state, capital data across all five layers, NorthStar profile, relationship phase, and named barriers. Updated after every session through a secondary extraction process." },
+  { term: "DNM — Decision Narrative Memory", tag: "acronym", def: "The long-term memory layer that archives every key decision: the reasoning at the time, dissenting views captured, the expected outcome, and the actual outcome (recorded years later). Used by TARA to surface precedents when similar decision patterns emerge and to refine future Decision Gravity scoring. Not an archive — a learning system. Builds over years and decades." },
+  { term: "HELEN", tag: "acronym", def: "The general-purpose AI architecture on which TARA is built. Not a specific acronym expansion — the name refers to the platform itself. TARA is the Wealth Horizons implementation overlay on HELEN v5.4. Other CAAS partners build different domain-specific applications on the same HELEN architecture." },
+  { term: "NLP — Natural Language Processing", tag: "acronym", def: "The branch of AI that enables systems to read, analyse, and interpret human language. TARA uses NLP to monitor family communications for sentiment shifts, Gottman Four Horsemen patterns, Bowen Triangulation signals, and pattern drift across conversations over time." },
+  { term: "NorthStar", tag: "acronym", def: "The normative layer above the Five Capital Layers in CoreView. Encodes each family member's core values, life purpose, and long-term aspirations. Used by TARA to evaluate whether a proposed decision is consistent with what that person actually values — not just what is financially optimal. The five layers describe the landscape. NorthStar is the compass." },
+  { term: "OODA Loop", tag: "acronym", def: "Observe, Orient, Decide, Act. A decision-cycle framework originally developed by military strategist John Boyd. TARA adapts it for the decision identification pipeline: she observes signals continuously, orients by cross-referencing against failure mode patterns, decides on a gravity score and classification, and acts by generating the Decision Object and initiating the resolution process." },
+  { term: "PAR — Proportional Allocation Rule", tag: "acronym", def: "A component of the Singer Moberg Guardian Intelligence model. An anti-cyclical portfolio discipline that systematically reduces exposure when markets are overvalued and increases it when they are undervalued — enforcing rational behaviour against emotional market pressure." },
+  { term: "RAPID", tag: "acronym", def: "Recommend, Agree, Perform, Input, Decide. A governance decision rights framework developed by Bain & Company. Used by TARA to assign roles within the family governance structure for any given decision. R = builds the case; A = must actively consent (veto holder); P = executes once authorised; I = input required but not determinative; D = single final decision authority. Only one person can hold D for any given decision. Encoded in the RBAC engine and stored in the Role Registry." },
+  { term: "RAG — Retrieval-Augmented Generation", tag: "acronym", def: "A technical architecture in which an AI model retrieves relevant information from a knowledge store before generating a response. TARA uses RAG to pull from the Portfolio Knowledge Store, SponsorSphere documents, and Personal Knowledge Bases when constructing her responses." },
+  { term: "RBAC — Role-Based Access Control", tag: "acronym", def: "The technical mechanism by which TARA enforces governance roles. Determines what data each family member and adviser can access, based on their RAPID role in the governance registry." },
+  { term: "ViQ — Values in Questions", tag: "acronym", def: "The psychographic typology used by CoreLens, adapted from Jungian personality theory. Maps each person across four axes (I/E, S/N, T/F, J/P) into one of eight subtypes. Determines how TARA calibrates her communication style, framing, and follow-through for each individual. An NF type needs human implications framed before numbers land. An ST type wants numbers first." },
+  { term: "WHIP® — Wealth Horizons Intelligence Platform", tag: "acronym", def: "The core Wealth Horizons platform. Everything else is an interface into it. TARA and the Staff App are client-facing and adviser-facing interfaces; the TARA Orchestration Layer is the intelligent membrane between them and the platform; WHIP® itself is the governed foundation housing infrastructure, data, intelligence, and governance." },
+
+  // ── CONCEPTS ────────────────────────────────────────────────────────────
+  { term: "Canonical Scenario Generation", tag: "concept", def: "TARA's structured method for modelling every High Gravity decision across three value orientations before presenting options to the family. Efficiency — maximises Financial Capital and liquidity. Cohesion — maximises Social, Human, and Intellectual Capital, family harmony and individual development. Legacy — maximises long-term identity and purpose aligned with the family charter. Prevents decisions from being framed as purely financial trade-offs. Each scenario is evaluated across all four time horizons." },
+  { term: "Chinese Wall", tag: "concept", def: "The structural separation between the Personal Sphere and the Sponsor Sphere. Not a firewall setting or a policy document — a structural impossibility. There is no pathway between the two spheres. A Wealth Horizons adviser, including an administrator, cannot query or retrieve personal memory. The guarantee is architectural, not policy-based." },
+  { term: "CoreSphere", tag: "concept", def: "The sphere holding universal knowledge shared across all TARA instances: the Companion Guide, the psychological frameworks, the Five Capital Framework, publicly available financial knowledge, and regulatory frameworks. Read-only for all users. No personal dimension." },
+  { term: "Decision Gravity Score", tag: "concept", def: "TARA's composite priority score for any elevated signal or decision. Calculated across four sub-dimensions: magnitude of capital impact, irreversibility, generational effect, and emotional intensity. The score determines whether TARA handles a decision automatically (Low), flags it for the adviser (Medium), or activates the full alignment protocol (High). Urgency is a fifth independent dimension that governs pacing." },
+  { term: "Decision Object", tag: "concept", def: "The structured formal record generated at the classification step that initiates the resolution lifecycle. Contains: decision description, gravity score, reversibility classification (Type 1 or Type 2), Cynefin domain, urgency flag, primary time horizon, RAPID role map with named individuals, hygiene conditions, and timeline. The seed entry for the DNM." },
+  { term: "Directed Knowledge Graph", tag: "concept", def: "The data model TARA uses to track how decisions in one capital layer cascade through others. Decision Nodes trigger changes in Capital Dimension Nodes, which alter State Nodes representing the family's governance maturity, generational readiness, and structural resilience. Tracks trajectory, not just position." },
+  { term: "Five Capital Framework", tag: "concept", def: "The five interdependent dimensions of capital that determine whether a family sustains or depletes its wealth across generations: Human Capital (health, career stage, aspirations, resilience), Social Capital (trust, governance roles, conflict dynamics), Intellectual Capital (financial literacy, advisory networks, institutional memory), Legacy Capital (family charter, shared purpose, generational identity), and Financial Capital (portfolio, liquidity, risk tolerance). Drawn from James E. Hughes Jr. Not proprietary. The framework is borrowed. The machine is original." },
+  { term: "Governance Translation Engine", tag: "concept", def: "TARA's mechanism for converting a human family decision into concrete system actions: updated portfolio constraints, Family Charter amendments, adviser dashboard notifications. The decision becomes infrastructure, not just a conversation record." },
+  { term: "Hidden Beta Drift", tag: "concept", def: "A risk phenomenon whereby apparently uncorrelated positions accumulate correlated exposure slowly over time, revealing concentrated risk during market stress precisely when diversification is most needed. Singer Moberg's geometric risk aggregation method detects and accounts for this." },
+  { term: "Living Constitution", tag: "concept", def: "The family charter converted into a dynamically updated governance document. TARA tracks how actual family decisions align with or deviate from the charter, and proactively suggests amendments when pattern drift occurs — turning a static PDF into a smart governance contract." },
+  { term: "NorthStar Deviation", tag: "concept", def: "A flag raised by the NorthStar Filter when a proposed scenario conflicts with a decision-maker's stated core values. Not a recommendation to refuse the decision — a signal that a values tension exists and should be made explicit before commitment. Surfaced before scenarios are presented to the family." },
+  { term: "NorthStar Evaluative Filter", tag: "concept", def: "See NorthStar. The filter step in the resolution lifecycle at which every generated scenario is evaluated against the family's stated purpose and each relevant member's individual NorthStar profile before being presented." },
+  { term: "Personal Knowledge Base", tag: "concept", def: "The unstructured store inside each family member's PersonalSphere that captures what does not map cleanly to the five capital layers: philosophical positions, unusual relationships to risk, cultural or spiritual orientations, childhood money stories, family mythology. The idiographic complement to the nomothetic Five Capital Framework. Nothing relevant falls through the floor." },
+  { term: "PersonalSphere", tag: "concept", def: "The cryptographically isolated data sphere holding each family member's personal information. Divided into three segments: Segment A (psychological profile, CoreView), Segment B (Capital Priority Vector — how this person weights the five capitals), Segment C (private capital data not consented to share with the family). The sponsor cannot access the PersonalSphere." },
+  { term: "Structural Failure Modes", tag: "concept", def: "TARA's formalised library of ten documented patterns that historically destroy multigenerational family wealth: Liquidity Illusion, Concentration Drift, Governance Ambiguity, Silent Misalignment Between Family Members, Identity and Legal Ambiguity, Generational Readiness Gaps, Decision Momentum Without Reflection, Portfolio Governance Detachment, Intergenerational Authority Transition, and External Environment Shock. The list is open to future additions." },
+  { term: "SponsorSphere", tag: "concept", def: "The sphere holding Wealth Horizons' domain expertise, accessible to TARA instances with role-based gating. Contains the investment framework, Singer Moberg Guardian Intelligence, governance templates, the Role Registry, the family charter, and adviser knowledge bases. Information flows from SponsorSphere into TARA's reasoning — never in the reverse direction." },
+  { term: "Time Horizons", tag: "concept", def: "The four temporal planning horizons used throughout TARA's decision architecture, aligned with the Singer Moberg investment framework. Tactical (0–1 year) — immediate operational decisions and near-term liquidity. Dynamic (0–10 years) — medium-term portfolio positioning and life transitions. Strategic (0–20 years) — generational planning, estate structure, and legacy foundations. Policy (20+ years) — enduring governance principles, family charter commitments, and multigenerational wealth continuity. The horizons are cumulative, not sequential." },
+  { term: "Values Collision Analysis", tag: "concept", def: "TARA's process of mapping each proposed financial scenario against every participating family member's NorthStar profile. Identifies where a financially optimal option would contradict a member's stated core values, surfacing that conflict as a non-financial risk before the decision meeting rather than discovering it during one." },
+
+  // ── PROTOCOLS & MECHANISMS ──────────────────────────────────────────────
+  { term: "Decision Hygiene Protocols", tag: "protocol", def: "Three structural gates enforced before any decision that is high-gravity, irreversible, or emotionally charged — any one condition is sufficient to trigger them. Protocol 1: Independent Judgment Collection (each member's input gathered privately before any group discussion, eliminating the anchoring effect). Protocol 2: Cooling-Off Period (mandatory pause calibrated to emotional intensity score). Protocol 3: Pre-Mortem Simulation (decision-makers imagine the decision has failed in five years and articulate what went wrong, forcing hidden risks to surface before commitment)." },
+  { term: "Downshift Protocol", tag: "protocol", def: "A Pillar 1 mechanism that softens TARA's activity level and communication register when the CoreWave emotional state detection indicates high stress. The Agentic layer throttles proactive suggestions. TARA prioritises psychological safety over task completion." },
+  { term: "Human Handoff", tag: "protocol", def: "The warm handover protocol by which TARA transfers a case to a human adviser when the situation exceeds her appropriate scope — acute emotional distress, genuine governance crisis, irreducibly complex human judgement, or explicit user request for human contact. Executed through the One-Time Consent Token (a time-limited, purpose-specific decryption key giving the adviser access to the directly relevant Personal Sphere context) and a Handover Brief." },
+  { term: "One-Time Consent Token", tag: "protocol", def: "A time-limited, purpose-specific decryption key generated during the Human Handoff protocol. Grants the receiving adviser access to the directly relevant context from the Personal Sphere needed to handle the situation. The only circumstance in which personal information leaves the Personal Sphere — and it requires the family member's explicit consent." },
+  { term: "Orchestrated Alignment", tag: "protocol", def: "The asynchronous engagement sequence used in Step 3 of the resolution lifecycle. TARA approaches family members in RAPID role sequence — Input roles first, then Recommend and Agree roles, then the Decide role last. Each approach is a governed agentic act requiring explicit consent through the Silver Platter Protocol. Private sentiments are stripped — only synthesised, anonymised positions advance. Prevents group anchoring." },
+  { term: "Permission Handshake", tag: "protocol", def: "The consent architecture governing every agentic act TARA takes on behalf of a user. Three conditions must be met before any action executes. Explicit: the user must actively approve the specific action, not a general category. Contextual: approval for one instance does not carry forward. Revocable: the user can withdraw authorisation at any point, including mid-execution." },
+  { term: "Silver Platter Protocol", tag: "protocol", def: "TARA's permission and consent management system for agentic actions. Named after the metaphor of presenting an action clearly on a silver platter — transparent and easy to accept or decline. Before executing any action, TARA presents it as a proposal: what she intends to do, why, and what the expected outcome is. Only on explicit approval does the action execute. Also governs the Orchestrated Alignment sequence — each approach to a family member is itself a consented agentic act through this protocol." },
+  { term: "Trust Monitor", tag: "protocol", def: "A Steward (Pillar 4) mechanism that tracks three trust signals continuously: Doubts (moments of reduced user confidence in TARA's outputs), Hesitation (avoidance patterns suggesting the relationship is under strain), and Correction (instances where the user overrides TARA's analysis or challenges her framing). When a trajectory is detected — not a single instance but a pattern — the Steward activates a recalibration protocol." },
+
+  // ── FRAMEWORKS & RESEARCH ───────────────────────────────────────────────
+  { term: "Allport — Idiographic vs. Nomothetic", tag: "framework", def: "Gordon Allport (1937) distinguished between nomothetic approaches — general frameworks applicable across people — and idiographic approaches — attending to the unique individual. The Five Capital Framework is nomothetic. TARA's Personal Knowledge Base is the idiographic complement, capturing what does not reduce to standard categories." },
+  { term: "Always Consult Rule", tag: "framework", def: "A hardcoded architectural requirement: before TARA finalises any scenario involving Financial Capital, she must query the Singer Moberg Guardian Intelligence engine. Not optional. Cannot be bypassed. A 500-path Monte Carlo simulation runs before the family sees any High Gravity financial scenario." },
+  { term: "Bezos — Type 1 / Type 2 Decision Framework", tag: "framework", def: "Popularised by Amazon CEO Jeff Bezos. Type 1 decisions are irreversible, one-way doors that permanently alter trajectory — TARA slows the process down, enforces full hygiene protocols, demands all Decision Maker sign-offs. Type 2 decisions are reversible, two-way doors — TARA speeds the process up, delegates to adviser or rules engine. Irreversible does not automatically mean high-gravity — they are independent dimensions." },
+  { term: "Bowen Family Systems Theory", tag: "framework", def: "Developed by psychiatrist Murray Bowen (1950s–1980s). Families are emotional units rather than collections of autonomous individuals. Two key concepts used by TARA: Differentiation of Self — a person's capacity to maintain emotional stability and independent values under family pressure (low differentiation is a governance risk flagged to the adviser); Triangulation — routing bilateral conflict through a third party to reduce emotional tension, which entrenches rather than resolves it." },
+  { term: "Cynefin Framework", tag: "framework", def: "Developed by Dave Snowden. Maps decision contexts into five domains. TARA uses four: Clear — cause and effect obvious, apply best practice automatically; Complicated — expertise required, good practice through analysis, flag for adviser input; Complex — human and relational dimensions make outcomes unpredictable, use mediation frameworks rather than financial solutions; Chaotic — no discernible cause and effect, act first, sense later, flag for immediate human escalation." },
+  { term: "Gottman Four Horsemen", tag: "framework", def: "Research by John Gottman identifying four communication patterns that predict relationship breakdown with very high reliability: Criticism (attacking character rather than behaviour), Contempt (communicating superiority or disgust — the most destructive of the four), Defensiveness (counter-attacking or becoming a victim), and Stonewalling (emotional withdrawal). TARA's NLP engine detects these in family communications and translates them into Social Capital structural risk alerts." },
+  { term: "Guardian Intelligence / Singer Moberg", tag: "framework", def: "The proprietary Wealth Horizons mathematical portfolio governance model. Three components: Geometric Risk Aggregation (risk compounds geometrically, not arithmetically — traditional models miss Hidden Beta Drift); Proportional Allocation Rule — PAR (anti-cyclical exposure discipline); Multilayer Covariance Modelling (asset dependencies at three levels — broad factors, mid-tier, granular). Not an alpha model — a structural convexity model. Enforced via the Always Consult rule." },
+  { term: "Hughes Jr., James E. — Five Capital Framework", tag: "framework", def: "Primary source for the Five Capital Framework, drawn from Family Wealth (1997) and Complete Family Wealth (2018). The framework identifies five interdependent dimensions of capital that, taken together, determine whether a family sustains or depletes its wealth across generations. Non-proprietary by design — the validation is in the literature. TARA uses the framework because it has been independently validated, not because it was invented for marketing purposes." },
+  { term: "Kelly — Personal Construct Theory", tag: "framework", def: "George Kelly (1955) argued that every person develops a unique system of constructs for making sense of their world that no pre-given taxonomy fully anticipates. The theoretical foundation for TARA's Personal Knowledge Base as an idiographic complement to the Five Capital Framework's nomothetic structure." },
+  { term: "Motivational Interviewing (MI)", tag: "framework", def: "Developed by William Miller and Stephen Rollnick. A collaborative, goal-oriented conversational style designed to strengthen motivation and resolve ambivalence — without argument, lectures, or pressure. Core techniques: open questions, affirmations, reflective listening, summarising. TARA uses MI-informed protocols when engaging resistant or ambivalent family members. She does not argue the financial case harder. She creates psychological safety for the real objection to surface." },
+  { term: "Nonaka and Takeuchi — Explicit vs. Tacit Knowledge", tag: "framework", def: "From The Knowledge-Creating Company (1995). Explicit knowledge can be formalised and stored in a taxonomy. Tacit knowledge is embedded in personal experience, intuition, and idiosyncratic context and is resistant to full formalisation. TARA's five capital layers store explicit, structured knowledge. The Personal Knowledge Base stores tacit and idiosyncratic context that resists categorisation. Any robust knowledge architecture must accommodate both." },
+  { term: "RAPID Decision Rights Framework", tag: "framework", def: "Developed by Bain & Company. Assigns five distinct roles for any governance decision: Recommend (builds the case), Agree (veto holder — must actively consent), Perform (executes once authorised), Input (perspective required but not determinative), Decide (single final authority — only one person per decision). TARA encodes this in the Role Registry and uses it to sequence the Orchestrated Alignment step." },
+];
+
+// ── Rendering ────────────────────────────────────────────────────────────
+
+function tagLabel(tag) {
+  const map = { acronym: "Acronym", concept: "Concept", framework: "Framework & Research", protocol: "Protocol & Mechanism" };
+  return map[tag] || tag;
+}
+
+function buildAlphaNav(entries) {
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  const activeLetters = new Set(entries.map(e => e.term[0].toUpperCase()));
+  const nav = document.getElementById("alpha-nav");
+  letters.forEach(l => {
+    const a = document.createElement("a");
+    a.href = "#letter-" + l;
+    a.textContent = l;
+    a.className = activeLetters.has(l) ? "has-entries" : "no-entries";
+    nav.appendChild(a);
+  });
+}
+
+function renderEntries(entries) {
+  const body = document.getElementById("glossary-body");
+  body.innerHTML = "";
+  document.getElementById("result-count").textContent = entries.length;
+  document.getElementById("no-results").style.display = entries.length === 0 ? "block" : "none";
+
+  if (entries.length === 0) return;
+
+  // Group by first letter
+  const groups = {};
+  entries.forEach(e => {
+    const l = e.term[0].toUpperCase();
+    if (!groups[l]) groups[l] = [];
+    groups[l].push(e);
+  });
+
+  Object.keys(groups).sort().forEach(letter => {
+    const section = document.createElement("div");
+    section.className = "letter-section";
+    section.id = "letter-" + letter;
+
+    const heading = document.createElement("div");
+    heading.className = "letter-heading";
+    heading.innerHTML = `<span class="big-letter">${letter}</span>`;
+    section.appendChild(heading);
+
+    groups[letter].forEach(entry => {
+      const div = document.createElement("div");
+      div.className = "entry";
+      div.dataset.tag = entry.tag;
+      div.dataset.search = (entry.term + " " + entry.def).toLowerCase();
+
+      div.innerHTML = `
+        <div class="entry-term">
+          ${entry.term}
+          <br><span class="tag tag-${entry.tag}">${tagLabel(entry.tag)}</span>
+        </div>
+        <div class="entry-def">${entry.def}</div>
+      `;
+      section.appendChild(div);
+    });
+
+    body.appendChild(section);
+  });
+}
+
+// ── Filtering & Search ───────────────────────────────────────────────────
+
+let currentFilter = "all";
+let currentSearch = "";
+
+function getFiltered() {
+  return ENTRIES.filter(e => {
+    const matchFilter = currentFilter === "all" || e.tag === currentFilter;
+    const matchSearch = currentSearch === "" ||
+      e.term.toLowerCase().includes(currentSearch) ||
+      e.def.toLowerCase().includes(currentSearch);
+    return matchFilter && matchSearch;
+  });
+}
+
+function update() { renderEntries(getFiltered()); }
+
+document.getElementById("search").addEventListener("input", function () {
+  currentSearch = this.value.toLowerCase().trim();
+  update();
+});
+
+document.querySelectorAll(".filter-btn").forEach(btn => {
+  btn.addEventListener("click", function () {
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    this.classList.add("active");
+    currentFilter = this.dataset.filter;
+    update();
+  });
+});
+
+// ── Init ─────────────────────────────────────────────────────────────────
+buildAlphaNav(ENTRIES);
+renderEntries(ENTRIES);
+</script>
+</body>
+</html>
